@@ -29,6 +29,8 @@ if ingredient_list:
 
     for x in ingredient_list:
         ingredient_string+=x +' ';
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        sf_df=st.json(smoothiefroot_response.json(), use_container_width=True)
 
     # st.write(ingredient_string);
 
@@ -47,13 +49,9 @@ if ingredient_list:
 
 # New Section: Call external API
 
-url = "https://my.smoothiefroot.com/api/fruit/watermelon"
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
 
-smoothiefroot_response = requests.get(url)
 
-if smoothiefroot_response.status_code == 200:
-    st.subheader("SmoothieFroot API Response")
-    st.json(smoothiefroot_response.json())
-else:
-    st.error("Failed to fetch data from SmoothieFroot API")
+    st.json(smoothiefroot_response.json(), use_container_width=True)
+
 
