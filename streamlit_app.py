@@ -24,24 +24,18 @@ ingredient_list = st.multiselect(
 )
 
 if ingredient_list:
-    st.write(ingredient_list)
 
-    ingredient_string = ""
+ 
+    ingredient_string=''
+ 
+    for each_fruit in ingredient_list:
+        ingredient_string+=each_fruit + ' '
+        st.subheader(each_fruit+ 'Nutrition_Information')
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+ each_fruit)  
+        sf_df=st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
+ 
+    st.write(ingredient_string)
 
-    # ✅ Loop ONLY for building ingredient string
-    for x in ingredient_list:
-        ingredient_string += x + " "
-
-    # ✅ API call OUTSIDE the loop
-    smoothiefroot_response = requests.get(
-        "https://my.smoothiefroot.com/api/fruit/watermelon"
-    )
-
-    if smoothiefroot_response.status_code == 200:
-        st.subheader("SmoothieFroot API Response")
-        st.json(smoothiefroot_response.json(), use_container_width=True)
-    else:
-        st.error("Failed to fetch data from SmoothieFroot API")
 
     # Insert into Snowflake
     my_insert_stmt = f"""
