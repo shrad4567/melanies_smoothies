@@ -1,7 +1,2 @@
-name: streamlit_env
-channels:
-  - snowflake
-dependencies:
-  - python=3.11
-  - streamlit
-  - snowflake-snowpark-python
+streamlit
+snowflake-snowpark-python
